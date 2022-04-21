@@ -126,8 +126,11 @@ def loadParams(filename):
 
 
     # Set here number of iterations and time periods
-    params['NUM_TRAINNING_ITER'] = int(params['NUM_TRAINNING_ITER'])
-    params['NUM_TESTING_ITER']=int(params['NUM_TESTING_ITER'])
+    params['NUM_TRAINNING_ITER'] = int(20)
+    params['NUM_TESTING_ITER']=int(20)
+    
+#    params['NUM_TRAINNING_ITER'] = int(params['NUM_TRAINNING_ITER'])
+#    params['NUM_TESTING_ITER']=int(params['NUM_TESTING_ITER'])
     params['NUM_ITER'] = int(params['NUM_TESTING_ITER'] + params['NUM_TRAINNING_ITER']) #Total number of iterations
     params['MAX_TIME']=int(15)
     params['Times'] = list(range(params['MAX_TIME']))
@@ -465,7 +468,7 @@ def Main():
             print("Reseting random seed!")
             np.random.seed(params['SEED_TESTING'])
             
-        t_init = time.clock()
+        t_init = time.perf_counter()
         print('Iteration = ', iteration)
         
         # Initial inventory
@@ -546,7 +549,7 @@ def Main():
         
           
 
-        t_end = time.clock()
+        t_end = time.perf_counter()
         recordSimu = (iteration,int(t_end-t_init),alpha,obj[iteration],(iteration<params['NUM_TRAINNING_ITER']))
         simuList.append(recordSimu)
        
